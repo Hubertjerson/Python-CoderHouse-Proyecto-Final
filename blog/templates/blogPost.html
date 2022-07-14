@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row my-4 text-center">
+  <h1>Soy un Post</h1>
+
+  {% for post in posts %}
+  <div class="col-md-4 p-4">
+    <div class="card bg-black card-project">
+
+      <div class="card-body">
+        <img src="{{post.image.url}}"class="card-img-top">
+        <h2 >{{post.title }}</h2>
+        <p >{{ post.description|striptags|truncatechars:100 }}</p>
+        <h3 >{{post.fecha_creacion|date:'M d Y'|upper}}</h3>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
