@@ -1,21 +1,31 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
 <div class="row my-4 text-center">
   <h1>Soy un Post</h1>
-
-  {% for post in posts %}
+  {% if posts %}
+  {% for form in posts %}
   <div class="col-md-4 p-4">
     <div class="card bg-black card-project">
 
       <div class="card-body">
-        <img src="{{post.image.url}}"class="card-img-top">
-        <h2 >{{post.title }}</h2>
-        <p >{{ post.description|striptags|truncatechars:100 }}</p>
-        <h3 >{{post.fecha_creacion|date:'M d Y'|upper}}</h3>
+        {% if form.image %}
+        <img src="{{form.image.url}}"class="card-img-top">
+        {% else %}
+        <img class="card-img-top" src="https://pescadata-images.s3.us-west-1.amazonaws.com/1642026639704no-image.png" alt="..." object-fit="contain" />
+        {% endif %}
+        <h2 >{{form.titulo }}</h2>
+        <p >{{ form.description|striptags|truncatechars:100 }}</p>
+        <h3 >{{form.fecha_creacion|date:'M d Y'|upper}}</h3>
+        <a href={% url 'editar_blog' form.id %}>editar</a>
+        <a href={% url 'eliminar_blog' form.id %}>eliminar</a>
       </div>
     </div>
   </div>
   {% endfor %}
+  {% else %}
+  no se encontraron post
+  {% endif %}
 </div>
 {% endblock %}

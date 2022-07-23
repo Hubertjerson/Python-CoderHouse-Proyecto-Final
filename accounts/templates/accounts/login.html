@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% include 'partials/navbar.html' %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container my-5">
+        <div class="col-lg-6">
+            
+            <h1>
+                Login
+            </h1>
+            <form action={% url 'login' %} method="post">
+                {% csrf_token %}
+                <table>
+                    {{form.as_table}}
+                </table>
+                
+
+                <button>Aceptar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% include 'partials/navbar.html' %}
+
+
+{% block content %}
+<p>
+    <form action={% url 'editar' %} method="post" enctype='multipart/form-data'>
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <button>Editar</button>
+    </form>
+</p>
+{% endblock %}
