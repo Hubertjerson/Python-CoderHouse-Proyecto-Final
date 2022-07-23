@@ -32,7 +32,7 @@ def login(request):
         form = AuthenticationForm()
         return render(request, 'accounts/login.html', {'form':form})
 
-def register (request): 
+def register (request):
     if request.method == 'POST':
 
         form = MyUserCreationForm(request.POST,request.FILES)
@@ -54,7 +54,7 @@ def editar (request):
     
     user = request.user
     mas_datos_usuario, _= MasDatosUsuario.objects.get_or_create(user=user)
-    
+
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
@@ -63,21 +63,17 @@ def editar (request):
                 user.first_name = data.get('first_name')
             if data.get('last_name'):
                 user.last_name = data.get('last_name')
-                
             user.email = data.get('email') if data.get('email') else user.email
             mas_datos_usuario.avatar = data.get('avatar') if data.get('avatar') else mas_datos_usuario.avatar
-            
-            # if data.get('password1') and data.get('password1') == data.get('password2'):
-            #     user.set_password(data.get('password1'))
-            
+
             mas_datos_usuario.save()
             user.save()
-    
+
             return render(request, 'accounts/perfil.html')
-        
+
         else:
             return render(request, 'accounts/editar_user.html', {'form': form})
-            
+
     form = MyUserEditForm(
             initial={
                 'email': user.email,

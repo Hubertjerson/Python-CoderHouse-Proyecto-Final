@@ -6,7 +6,7 @@
 <p>
     <form action={% url 'editar' %} method="post" enctype='multipart/form-data'>
         {% csrf_token %}
-        <table>
+        <table class="bg-black">
             {{form.as_table}}
         </table>
         <button>Editar</button>
