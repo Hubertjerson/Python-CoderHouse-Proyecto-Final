@@ -1,10 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
 
-{% block content %}
-<form action={% url 'editar_blog' post.id %} method="post">
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    <button>Editar</button>
-</form>
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+<section class="tournaments-section spad">
+    <div class="container">
+        <div class="tournament-title">Editar Blog</div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="tournament-item mb-4 mb-lg-0">
+                    <div class="ti-content">
+                        <form action={% url 'editar_blog' post.id %} method="post">
+                            {% csrf_token %}
+                            <table class='text-white'>
+                                {{form.as_table}}
+                            </table>
+                            <button>Editar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

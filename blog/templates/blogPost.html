@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block header %}
 
-{% block content %}
+{% include 'partials/header.html' %}
 
+{% endblock header %}
+
+{% block main_content %}
+<h1 class="text-center">Soy un Post</h1>
 <div class="row my-4 text-center">
-  <h1>Soy un Post</h1>
   {% if posts %}
   {% for form in posts %}
   <div class="col-md-4 p-4">
-    <div class="card bg-black card-project">
-
-      <div class="card-body">
+    <div class="card">
+      <div class="review-item">
         {% if form.image %}
-        <img src="{{form.image.url}}"class="card-img-top">
+        <img src="{{form.image.url}}" class="review-cover set-bg">
         {% else %}
         <img class="card-img-top" src="https://pescadata-images.s3.us-west-1.amazonaws.com/1642026639704no-image.png" alt="..." object-fit="contain" />
         {% endif %}
         <h2 >{{form.titulo }}</h2>
         <p >{{ form.description|striptags|truncatechars:100 }}</p>
-        <h3 >{{form.fecha_creacion|date:'M d Y'|upper}}</h3>
         <a href={% url 'editar_blog' form.id %}>editar</a>
         <a href={% url 'eliminar_blog' form.id %}>eliminar</a>
       </div>

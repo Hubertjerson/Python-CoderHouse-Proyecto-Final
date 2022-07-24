@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
-{% include 'partials/navbar.html' %}
+{% load static %}
+{% block header %}
 
-{% block content %}
-<h1 class="bg-black">
-    Te deslogueaste con exito!
-</h1>
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/4.jpg' %}">
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>Muchas Gracias, Te deslogueaste con Exito!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

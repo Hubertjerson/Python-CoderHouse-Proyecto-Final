@@ -1,9 +1,29 @@
-<h1>Create post</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
 
-<form action={% url 'blog_get' %} method="post" enctype="multipart/form-data" >
-    {% csrf_token %}
-    <table>
-        {{form.as_table}}
-    </table>
-    <button>Crear</button>
-</form>
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/3.jpg' %}">
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>Game reviews</h2>
+                    <form action={% url 'blog_get' %} method="post" enctype="multipart/form-data" >
+                        {% csrf_token %}
+                        <table>
+                            {{form.as_table}}
+                        </table>
+                        <button>Crear</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main_content %}

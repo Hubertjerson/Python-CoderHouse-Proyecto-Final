@@ -1,22 +1,26 @@
 {% extends 'base.html' %}
-{% include 'partials/navbar.html' %}
+{% load static %}
+{% block header %}
 
-{% block content %}
-<section class="py-5">
-    <div class="container my-5">
-        <div class="col-lg-6">
-            
-            <h1>
-                Login
-            </h1>
-            <form action={% url 'login' %} method="post">
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+
+{% block main_content %}
+
+<section class="review-section review-dark spad set-bg" data-setbg="{% static 'img/review-bg-2.jpg' %}">
+    <div class="container">
+        <div class="text-white">
+            <h2>Login</h2>
+        </div>
+        <div class="card-body">
+            <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <table class="bg-black">
-                    {{form.as_table}}
+                <table>
+                    {{form.as_p}}
                 </table>
-                
-
-                <button>Aceptar</button>
+                <button>Entrar</button>
             </form>
         </div>
     </div>

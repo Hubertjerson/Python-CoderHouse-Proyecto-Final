@@ -1,18 +1,34 @@
 {% extends 'base.html' %}
-{% include 'partials/navbar.html' %}
-{% block content %}
-<header class="row bg-black">  
-    <div class="col-md-8 my-auto p-4">
-      <h1><strong>Jerson Huaman</strong></h1>
-      <h3>Un poco Sobre Mi</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis tempora perspiciatis molestias iusto ducimus
-        soluta mollitia ratione, fuga praesentium, reiciendis minima! Facere, veniam! Omnis, quod molestias quo fugit enim
-        vero vitae, cumque tenetur at, impedit provident dicta laudantium quia facilis consequuntur blanditiis iste
-        laborum voluptatibus libero doloribus? Pariatur voluptatem obcaecati deserunt aperiam exercitationem nam voluptas
-        rerum reprehenderit minima, earum impedit saepe eos ducimus fugit itaque a nulla omnis architecto laudantium
-        blanditiis? Eius ipsum quidem enim architecto fugiat porro inventore libero praesentium aperiam nulla
-        exercitationem nemo soluta, culpa impedit est et doloribus ut necessitatibus odit, dicta voluptate! Vero ab nulla
-        placeat.</p>
+{% load static %}
+{% block header %}
+
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+
+<section class="recent-game-section spad set-bg" data-setbg="{% static 'img/recent-game-bg.png' %}">
+  <div class="container">
+    <div class="section-title">
+      <div class="cata new"></div>
+      <h2>Un poco Sobre Mi</h2>
     </div>
-  </header>
+    <div class="col-auto">
+      <div class="col-md-8 my-auto p-4">
+        <div class="recent-game-item">
+          <div class="rgi-content">
+            <h5>Jerson Huaman</h5>
+            <p> Hola mi nombre es Jerson Huaman Moreno , comence en este mundo de la programacion mas que todo por curiosidad de como
+              es que se hacen las paginas web y los sistemas de ventas de las empresas he cursado el curso de Desarrollo Web , Javascripts, ReactJs , SQL
+              y ahora terminando el curso de python y pronto terminar el curso de Back End , Quiero seguir aprendiendo hacerca de este mundo , lo que mas me gusta
+              es el desarrollo web desde el Front End , odio el Back End :c , espero les guste este pequeño proyecto que es un blog , para el curso de Python
+              es un blog Gamer donde puedes compartir tus expereciencias en los videojuegos.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
   {% endblock %}

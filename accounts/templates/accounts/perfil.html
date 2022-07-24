@@ -1,22 +1,27 @@
 {% extends 'base.html' %}
-{% include 'partials/navbar.html' %}
+{% load static %}
+{% block header %}
 
+{% include 'partials/header.html' %}
 
-{% block content %}
-<p>
-    <ul>
-        <li class="bg-black">Nombre: {{request.user.first_name}}</li>
-        <li class="bg-black">Apellido: {{request.user.last_name}}</li>
-        <li class="bg-black">Email: {{request.user.email}}</li>
-        <li>
-            <p class="bg-black">Avatar:</p>
-            {% if request.user.masdatosusuario.avatar %}
-            <img src={{request.user.masdatosusuario.avatar.url}} alt="" height="200px">
-            {% endif %}
-        </li>
-    </ul>
-</p>
-<p>
-    <a href={% url 'editar' %}>Editar mis datos</a>
-</p>
+{% endblock header %}
+
+{% block main_content %}
+
+<h5>
+    {% if mas_datos.imagen %}
+    <img src="{{mas_datos.imagen.url}}" alt=""  width="250" height="250" >
+    {% else %}
+    <img src="https://pescadata-images.s3.us-west-1.amazonaws.com/1642026639704no-image.png" alt="..." width="250" height="250"/>
+    {% endif %}
+    <li>{{request.user.username}}</li>
+    <li>{{request.user.first_name}}</li>
+    <li>{{request.user.last_name}}</li>
+    <li>{{request.user.email}}</li>
+    <li>{{mas_datos.link}}</li>
+    <li>{{mas_datos.bio}}</li>
+</h5>
+<div>
+    <h2><a class="nav-link" href={% url 'editar'%} >Editar Perfil</a></h2>
+</div>
 {% endblock %}

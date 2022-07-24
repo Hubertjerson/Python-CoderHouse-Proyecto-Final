@@ -1,15 +1,15 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as Login, authenticate
 from django.contrib.auth.decorators import login_required
 
-from accounts.models import MasDatosUsuario
-from .forms import MyUserCreationForm, MyUserEditForm
+from .forms import form_register, form_edit_user
+from .models import NuestroUser
 
 # Create your views here.
 
 def login(request):
-    if request.method == 'POST':  
+    if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
 
 
@@ -35,7 +35,7 @@ def login(request):
 def register (request):
     if request.method == 'POST':
 
-        form = MyUserCreationForm(request.POST,request.FILES)
+        form = form_register(request.POST,request.FILES)
         #usuario_extendido, _ = NuestroUser.objects.get_or_create(user=request.user)
 
         if form.is_valid():
@@ -46,45 +46,52 @@ def register (request):
             return render(request, "home.html", {'msj':f'Se creo el user {username}'})
         else:
             return render(request, "accounts/register.html", {'form':form})
-    form = MyUserCreationForm()
+    form = form_register()
     return render(request, "accounts/register.html", {'form':form})
 
 @login_required
 def editar (request):
     
-    user = request.user
-    mas_datos_usuario, _= MasDatosUsuario.objects.get_or_create(user=user)
+    usuario_extendido, _= NuestroUser.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
-        form = MyUserCreationForm(request.POST, request.FILES)
+        form = form_edit_user(request.POST, request.FILES)
+
         if form.is_valid():
+
             data = form.cleaned_data
-            if data.get('first_name'):
-                user.first_name = data.get('first_name')
-            if data.get('last_name'):
-                user.last_name = data.get('last_name')
-            user.email = data.get('email') if data.get('email') else user.email
-            mas_datos_usuario.avatar = data.get('avatar') if data.get('avatar') else mas_datos_usuario.avatar
+            logued_user = request.user
+            logued_user.email = data.get('email')
+            logued_user.first_name = data.get('first_name',)
+            logued_user.last_name = data.get('last_name')
+            usuario_extendido.imagen = data['imagen']
+            usuario_extendido.link= data['link']
+            usuario_extendido.bio = data['bio']
 
-            mas_datos_usuario.save()
-            user.save()
 
-            return render(request, 'accounts/perfil.html')
+            if data.get('password1') == data.get('password2') and len(data.get("password1")) >8:
+                logued_user.set_password(data.get('password1'))
 
+            logued_user.save()
+            usuario_extendido.save()
+
+            return render(request, "home.html", {})
         else:
-            return render(request, 'accounts/editar_user.html', {'form': form})
+            return render(request, "home.html", {'form':form})
 
-    form = MyUserEditForm(
-            initial={
-                'email': user.email,
-                'first_name': user.first_name,
-                'last_name': user.last_name,
-                'avatar': mas_datos_usuario.avatar
-            }
-        )
-
-    return render(request, 'accounts/editar_user.html', {'form': form})
+    form = form_edit_user(
+        initial={
+            'email': request.user.email,
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'imagen': usuario_extendido.imagen,
+            'link': usuario_extendido.link,
+            'bio': usuario_extendido.bio
+        }
+    )
+    return render(request, "accounts/editar_user.html", {'form':form})
 
 @login_required
 def perfil(request):
-    return render(request, 'accounts/perfil.html')
+    mas_datos, _ = NuestroUser.objects.get_or_create(user=request.user)
+    return render(request, "accounts/perfil.html", {'mas_datos':mas_datos})
