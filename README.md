@@ -62,3 +62,5 @@ Recomendacion: Generar un entorno virtual
 > <p>Tutor: Jonatan Canchi.</p>
 ## Author
 > <p>Hubert Jerson Huaman Moreno. </p>
+## Video
+> [Youtube](https://youtu.be/nHzeOEWm0XA)
