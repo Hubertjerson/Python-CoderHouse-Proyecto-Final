@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Detalles del Mensaje</title>
+{% endblock title %}
+
+{% block header %}
+
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+
+{% block main_content %}
+<section class="page-info-section set-bg" data-setbg="{% static 'img/page-top-bg/1.jpg' %}">
+    <div class="pi-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-6 text-white">
+                    <h2>Mensaje de {{message.sender}}</h2>
+                    <p>{{message.contenido}}</p>
+                    <a href="{%url 'Delete_message' message.id%}" class="btn btn-danger">Borrar</a>
+                    <a href="{% url 'Messages' %}" class="btn btn-link">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main_content %}

@@ -2,7 +2,7 @@
 <header class="header-section">
 	<div class="container">
 		<!-- logo -->
-		<a class="site-logo" href="index.html">
+		<a class="site-logo" href={% url 'home' %}>
 			<img src="{% static 'img/logo.png' %}" alt="">
 		</a>
 		<!-- responsive -->
@@ -15,18 +15,15 @@
 				<li><a href={% url 'home' %}>Home</a></li>
 				<li><a href={% url 'about' %}>about</a></li>
 				<li><a href={% url 'blog_post' %}>Blog</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li><a href={% url 'perfil' %}>
-                            {% if request.user.mas_datos.imagen %}
-                                <img src={{request.user.mas_datos.imagen.url}} alt="50px" height="50px">
-                            {% endif %}
-                            {{request.user.username}}</a></li>
-					    <li><a href={% url 'blog_get'%}>Subir Post</a></li>
-                        <li><a href={% url 'logout' %}>Logout</a></li>
-                    {% else %}
-                    <li><a href={% url 'login' %}>Login</a></li>
-                    <li><a href={% url 'register'%}>Registrarse</a></li>
-                    {% endif %}
+                {% if request.user.is_authenticated %}
+                <li><a href={% url 'perfil' %}>{{request.user.username}}</a></li>
+				<li><a href={% url 'blog_get'%}>Subir Post</a></li>
+                <li><a href={% url 'logout' %}>Logout</a></li>
+				<li><a href={% url 'Messages' %}>Mensajes</a></li>
+                {% else %}
+                <li><a href={% url 'login' %}>Login</a></li>
+                <li><a href={% url 'register'%}>Registrarse</a></li>
+                {% endif %}
 			</ul>
 		</nav>
 	</div>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Crear Mensaje</title>
+{% endblock title %}
+
+{% block header %}
+
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+<section class="footer-top-section">
+    <div class="container">
+        <div class="footer-top-bg">
+            <img src="{% static 'img/footer-top-bg.png' %}" alt="">
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="footer-logo text-white">
+                    <h1>Mensajeria</h1>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-widget mb-5 mb-md-0">
+                    <h4 class="fw-title">Envia tus Mensajes</h4>
+                    <div class="latest-blog">
+                        <div class="lb-item">
+                            <div>
+                                <form action={% url 'New_message' %} method="post">
+                                    {% csrf_token %}
+                                    <table class="text-white">
+                                        {{form.media}}
+                                        {{form.as_table}}
+                                    </table>
+                                <div class="container mt-5">
+                                    <button type="submit" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-ok"></span>Crear mensaje
+                                    </button>
+                                    <a href="{% url 'home' %}" class="btn btn-default">Cancelar</a>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main_content %}
