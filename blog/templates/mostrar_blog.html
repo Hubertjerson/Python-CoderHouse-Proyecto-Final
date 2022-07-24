@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block header %}
+
+{% include 'partials/header.html' %}
+
+{% endblock header %}
+
+{% block main_content %}
+<section class="review-section review-dark spad set-bg" data-setbg="{% static 'img/review-bg-2.jpg' %}">
+    <div class="container">
+        <div class="section-title text-white">
+            <div class="cata new">Nuevo Post Publicado por</div>
+            <h2>{{form.author}}</h2>
+        </div>
+        <div class="row text-white">
+            <div class="col-lg-3 col-md-6">
+                <div class="review-item">
+                    <div class="review-cover set-bg" data-setbg="{{form.image.url}}">
+                        <div class="score yellow">9.3</div>
+                    </div>
+                    <div class="review-text text-black">
+                        <div>{{form.fecha_creacion}}</div>
+                        <h2>{{form.titulo }}</h2>
+                        <h5>{{form.subtitulo }}</h5>
+                        <p>{{ form.description|safe}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

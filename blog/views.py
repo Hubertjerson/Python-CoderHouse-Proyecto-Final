@@ -1,8 +1,9 @@
 from datetime import datetime
 from django.shortcuts import redirect, render
-
+from django.contrib.auth.decorators import login_required
 from blog.forms import FormBlog
 from blog.models import Blog
+
 # Create your views here.
 
 
@@ -18,7 +19,7 @@ def lista_post(request):
     posts = Blog.objects.all()
     return render(request, 'blogPost.html', {'posts': posts})
 
-
+@login_required
 def formulario_blog(request):
 
     if request.method == 'POST':
@@ -48,7 +49,7 @@ def formulario_blog(request):
 
     return render(request, 'blogGet.html', {'form': form_blog})
 
-
+@login_required
 def editar_blog(request, id):
     post = Blog.objects.get(id=id)
     if request.method == 'POST':
@@ -69,9 +70,14 @@ def editar_blog(request, id):
     
     return render(request, 'editarBlog.html',{'form': form_blog,'post':post})
 
-
+@login_required
 def eliminar_blog(request, id):
     blog = Blog.objects.get(id=id)
     blog.delete()
     return redirect('blog_post')
+
+@login_required
+def mostrar_blog(request, id):
+    form = Blog.objects.get(id=id)
+    return render(request, 'mostrar_blog.html', {'form': form})
 

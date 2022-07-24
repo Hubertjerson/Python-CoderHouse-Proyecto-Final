@@ -36,14 +36,10 @@ def register (request):
     if request.method == 'POST':
 
         form = form_register(request.POST,request.FILES)
-        #usuario_extendido, _ = NuestroUser.objects.get_or_create(user=request.user)
 
         if form.is_valid():
-            #user = usuario_extendido(imagen=form.cleaned_data['imagen'])
-            #user.save()
-            username = form.cleaned_data['username']
             form.save()
-            return render(request, "home.html", {'msj':f'Se creo el user {username}'})
+            return render(request, "home.html")
         else:
             return render(request, "accounts/register.html", {'form':form})
     form = form_register()
