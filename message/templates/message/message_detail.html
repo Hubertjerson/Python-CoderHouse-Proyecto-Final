@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-5 col-lg-6 text-white">
-                    <h2>Mensaje de {{message.sender}}</h2>
+                    <h2>Mensaje de {{message.sender}} para {{message.reciever}}</h2>
                     <p>{{message.contenido}}</p>
                     <a href="{%url 'Delete_message' message.id%}" class="btn btn-danger">Borrar</a>
                     <a href="{% url 'Messages' %}" class="btn btn-link">Regresar</a>
