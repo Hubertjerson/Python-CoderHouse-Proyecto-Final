@@ -8,3 +8,6 @@ class FormBlog(forms.Form):
     description = RichTextFormField()
     image = forms.ImageField(required=False)
     fecha_creacion = forms.DateTimeField(required=False)
+    
+class BusquedaAuthor(forms.Form):
+    author = forms.CharField(max_length=30, required=False)

@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-from blog.forms import FormBlog
+from blog.forms import FormBlog,BusquedaAuthor
 from blog.models import Blog
 
 # Create your views here.
@@ -16,8 +16,16 @@ def home(request):
 
 
 def lista_post(request):
-    posts = Blog.objects.all()
-    return render(request, 'blogPost.html', {'posts': posts})
+    
+    busqueda=request.GET.get('author')
+    
+    if busqueda:
+        listado = Blog.objects.filter(author__icontains=busqueda)
+    else:
+        listado = Blog.objects.all()
+    
+    posts = BusquedaAuthor()
+    return render(request, 'blogPost.html', {'posts': posts, 'listado': listado})
 
 @login_required
 def formulario_blog(request):
