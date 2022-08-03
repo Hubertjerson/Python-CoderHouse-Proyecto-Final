@@ -35,7 +35,7 @@ def formulario_blog(request):
 
         if form.is_valid():
             data = form.cleaned_data
-
+            msj = form.cleaned_data('titulo')
             fecha = data.get('fecha_creacion')
             if not fecha:
                 fecha = datetime.now()
@@ -52,7 +52,7 @@ def formulario_blog(request):
 
             return redirect('blog_post')
         else:
-            return render(request, 'blogGet.html', {'posts': form})
+            return render(request, 'blogGet.html', {'posts': form, 'msj':f'Se creo el post "{msj}"'})
     form_blog = FormBlog()
 
     return render(request, 'blogGet.html', {'form': form_blog})
@@ -67,6 +67,7 @@ def editar_blog(request, id):
             post.subtitulo=form.cleaned_data.get('subtitulo')
             post.author=form.cleaned_data.get('author')
             post.description=form.cleaned_data.get('description')
+            post.image=form.cleaned_data.get('image')
             post.fecha_creacion=form.cleaned_data.get('fecha_creacion')
             post.save()
             
@@ -74,7 +75,7 @@ def editar_blog(request, id):
         else:
             return render(request, 'editarBlog.html',{'form': form, 'post':post})
     
-    form_blog= FormBlog(initial={'titulo':post.titulo, 'subtitulo':post.subtitulo,'author':post.author,'description':post.description, 'fecha_creacion':post.fecha_creacion})
+    form_blog= FormBlog(initial={'titulo':post.titulo, 'subtitulo':post.subtitulo,'author':post.author,'description':post.description, 'image':post.image ,'fecha_creacion':post.fecha_creacion})
     
     return render(request, 'editarBlog.html',{'form': form_blog,'post':post})
 
@@ -84,7 +85,7 @@ def eliminar_blog(request, id):
     blog.delete()
     return redirect('blog_post')
 
-@login_required
+
 def mostrar_blog(request, id):
     form = Blog.objects.get(id=id)
     return render(request, 'mostrar_blog.html', {'form': form})

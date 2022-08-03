@@ -15,24 +15,24 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class mensaje_lista(LoginRequiredMixin, ListView):
+class MensajeLista(LoginRequiredMixin, ListView):
 
     model = Message
     template_name = "message/message_list.html"
 
-class mensaje_detalle(LoginRequiredMixin, DetailView):
+class MensajeDetalle(LoginRequiredMixin, DetailView):
 
     model = Message
     template_name = "message/message_detail.html"
 
-class crear_mensaje(LoginRequiredMixin, CreateView):
+class CrearMensaje(LoginRequiredMixin, CreateView):
 
     model = Message
     success_url = "/messages/"
     fields = ['titulo','sender', 'reciever', 'contenido', 'fecha']
 
 
-class eliminar_mensaje(LoginRequiredMixin, DeleteView):
+class EliminarMensaje(LoginRequiredMixin, DeleteView):
 
     model = Message
     success_url = "/messages/"
