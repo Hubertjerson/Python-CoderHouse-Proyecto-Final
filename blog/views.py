@@ -61,7 +61,7 @@ def formulario_blog(request):
 def editar_blog(request, id):
     post = Blog.objects.get(id=id)
     if request.method == 'POST':
-        form = FormBlog(request.POST)
+        form = FormBlog(request.POST, request.FILES)
         if form.is_valid():
             post.titulo=form.cleaned_data.get('titulo')
             post.subtitulo=form.cleaned_data.get('subtitulo')

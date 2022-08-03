@@ -21,8 +21,8 @@
     <li>{{request.user.first_name}}</li>
     <li>{{request.user.last_name}}</li>
     <li>{{request.user.email}}</li>
-    <li>{{mas_datos.link}}</li>
     <li>{{mas_datos.bio}}</li>
+    <li><a href={{mas_datos.link}} >{{mas_datos.link}}</a></li>
 </h5>
 <div>
     <h2><a class="nav-link" href={% url 'editar'%} >Editar Perfil</a></h2>

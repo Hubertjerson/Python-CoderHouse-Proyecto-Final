@@ -18,7 +18,7 @@
             <div class="col-md-6">
                 <div class="tournaments-section mb-4 mb-lg-0 back" >
                     <div class="ti-content">
-                        <form action={% url 'editar_blog' post.id %} method="post">
+                        <form action={% url 'editar_blog' post.id %} method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <table class='text-white'>
                                 {{form.media}}
